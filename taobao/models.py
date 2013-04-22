@@ -5,12 +5,12 @@ Created on 2013-4-21
 @author: xinting
 '''
 from django.db import models
+from django.contrib.auth.models import User
 
-class TaobaoUser(models.Model):
-    user_id = models.IntegerField()
-    uid = models.CharField(max_length=32)
-    nick = models.CharField(max_length=32)
-    password = models.CharField(max_length=64)
+class UserProfile(models.Model):
+    user = models.ForeignKey(User)
+    
+    sessionKey = models.CharField(max_length=128)
     
     def __unicode__(self):
-        return self.nick
+        return self.user.username, self.sessionKey

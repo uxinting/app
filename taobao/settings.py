@@ -15,6 +15,8 @@ APPSECRET = 'sandbox08a64ebcb8ed8394d89c69ed3'
 SANDBOX_URL = 'gw.api.tbsandbox.com'
 SANDBOX_AUTH = 'http://container.api.tbsandbox.com/container?appkey=' + APPKEY + '&encode=utf-8'
 
+AUTH_PROFILE_MODULE = "taobao.userprofile"
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.

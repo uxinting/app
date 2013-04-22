@@ -7,7 +7,7 @@ from taobao import settings
 
 urlpatterns = patterns('taobao.views',
                        url(r'^$', 'sell'),
-                       url(r'^auth', 'auth'),
+                       (r'^auth/', include('auth.urls')),
     # Examples:
     # url(r'^$', 'taobao.views.home', name='home'),
     # url(r'^taobao/', include('taobao.foo.urls')),
