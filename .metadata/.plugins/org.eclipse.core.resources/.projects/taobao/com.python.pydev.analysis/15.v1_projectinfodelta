@@ -1,0 +1,9 @@
+INSTUPtop.api.rest.WlbWlborderGetRequest
+/home/xinting/Documents/workspace/taobao/top/api/rest/WlbWlborderGetRequest.py
+INFOS:&&1|1|2|0&&2|3|2|1&&3|4|2|5&&2|6|2|1
+__init__=3
+WlbWlborderGetRequest.__init__=5
+top.api.rest.WlbWlborderGetRequest=2
+getapiname=6
+wlb_order_code=4
+WlbWlborderGetRequest=1

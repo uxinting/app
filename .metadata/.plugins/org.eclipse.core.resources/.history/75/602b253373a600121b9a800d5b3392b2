@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Taobao</title>
+		
+		<script type="text/javascript" src="../_lib/jquery.js"></script>
+		<script type="text/javascript" src="../_lib/jquery.cookie.js"></script>
+		<script type="text/javascript" src="../_lib/jquery.hotkeys.js"></script>
+		<script type="text/javascript" src="../jquery.jstree.js"></script>
+	
+		<link type="text/css" rel="stylesheet" href="syntax/!style.css"/>
+		<link type="text/css" rel="stylesheet" href="!style.css"/>
+		<script type="text/javascript" src="syntax/!script.js"></script>
+	</head>
+	<body>
+		{% for i in info %}
+			<p>{{ i.cid }}<strong>{{ i.name }}</strong></p>
+		{% endfor %}
+	</body>
+</html>

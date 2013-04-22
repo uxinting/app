@@ -1,0 +1,10 @@
+INSTUPtop.api.rest.WlbTradeorderGetRequest
+/home/xinting/Documents/workspace/taobao/top/api/rest/WlbTradeorderGetRequest.py
+INFOS:&&1|1|2|0&&2|3|2|1&&3|4|2|5&&3|6|2|5&&2|7|2|1
+WlbTradeorderGetRequest=1
+__init__=3
+WlbTradeorderGetRequest.__init__=5
+trade_id=4
+getapiname=7
+top.api.rest.WlbTradeorderGetRequest=2
+trade_type=6

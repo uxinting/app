@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Taobao</title>
+	</head>
+	<body>
+		{{ info }}
+		{% for k in info %}
+			{{ k }} {{ v }}
+		{% endfor %}
+		{% for i in info %}
+			<p>{{ i.cid }}<strong>{{ i.name }}</strong></p>
+		{% endfor %}
+	</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/css/calligraphy.css"/>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+	<div id="calligraphy-grids">
+		<ul class="grid-row">
+			{% for pic in pictures %}
+				<li>
+					<img src="/static/img/ym.png"/>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<a href="javascript: loadMore()" class="btn">Load more</a>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="/static/js/loadmore.js"></script>
+{% endblock %}

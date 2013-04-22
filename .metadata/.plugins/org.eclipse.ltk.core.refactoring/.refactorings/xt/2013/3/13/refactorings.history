@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;xt/xt/static/js/jquery-1.9.1.js&apos; to &apos;jqueryjs&apos;" description="Rename resource &apos;jquery-1.9.1.js&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="xt/static/js/jquery-1.9.1.js" name="jqueryjs" stamp="1364605041533" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;xt/xt/static/js/jqueryjs&apos; to &apos;jquery.js&apos;" description="Rename resource &apos;jqueryjs&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="xt/static/js/jqueryjs" name="jquery.js" stamp="1364605056112" updateReferences="true"/>
+</session>

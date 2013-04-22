@@ -1,0 +1,43 @@
+#-*- coding: utf-8 -*-
+'''
+Created on 2013-4-16
+
+@author: xinting
+'''
+from django.shortcuts import render_to_response
+import top.api
+from taobao import settings
+
+import base64, md5
+
+def sell(request):
+    authurl = settings.SANDBOX_AUTH
+    return render_to_response('sell.html', locals())
+
+def auth(request):
+    try:
+        top_appkey = request.GET.get('top_appkey', 'none')
+        top_session = request.GET.get('top_session', 'none')
+        top_parameters_base64 = request.GET.get('top_parameters', 'none')
+        top_parameters = base64.decode(top_parameters_base64)
+        top_sign = request.GET.get('top_sign', 'none')
+        if top_sign != base64(md5.new(top_appkey + top_parameters + top_session + settings.APPSECRET).digest()):
+            return render_to_response('sell.html', {'error': '签名未通过, 授权失败'})
+    except:
+        pass
+=======
+
+def welcome(request):
+    top.setDefaultAppInfo(settings.APPKEY, settings.APPSECRET)
+    
+    #req = top.api.UserGetRequest(settings.SANDBOX_URL)
+    #req = top.api.UserBuyerGetRequest(settings.SANDBOX_URL)
+    req = top.api.ItemcatsGetRequest(settings.SANDBOX_URL)
+    req.fields = 'cid, name, parent_cid'
+    req.parent_cid = 0
+    try:
+        info = req.getResponse(settings.C_1_SESSION_KEY).get('itemcats_get_response', '').get('item_cats', '').get('item_cat', '')
+    except Exception, e:
+        info = e
+    return render_to_response('welcome.html', {'info': info})
+>>>>>>> 2b3318177d42cd197edbcb8e6a4ac45c40893cf1

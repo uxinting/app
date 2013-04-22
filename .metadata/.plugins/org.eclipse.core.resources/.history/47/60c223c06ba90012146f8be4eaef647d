@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Base</title>
+		<meta charset="utf-8" />
+		
+		<!-- css -->
+		<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/static/morris/morris.css" />
+		<link rel="stylesheet" href="/static/css/base.css" />
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="navbar navbar-inverse">
+					<div class="navbar-inner">
+						<div class="brand" href="#">
+							谋商
+						</div>
+						<ul class="nav">
+							<li class="active"><a href="#">我的销售</a></li>
+							<li><a href="#">我的买家</a></li>
+							<li><a href="#">我的宝贝</a></li>
+							<li><a href="#">关于我们</a></li>
+						</ul>
+						<form class="navbar-search pull-right">
+							<input type="text" class="search-query" placeholder="Search" />
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span2">
+					<div class="nav-container">
+					</div>
+					<ul class="nav nav-tabs nav-stacked">
+						<li class="active">
+							<a href="#sell" data-toggle="tab">销售情况</a>
+						</li>
+						<li><a href="#action-sell" data-toggle="tab">行为与销售</a></li>
+						<li><a href="#prodict" data-toggle="tab">预测</a></li>
+						<li><a href="#customer" data-toggle="tab">我的客户</a></li>
+					</ul>
+				</div>
+				<div class="span10">
+					<div class="content-container">
+					</div>
+					<div class="tab-content">
+						<div class="tab-pane active" id="sell">
+							<div class="tabbable">
+								<ul class="nav nav-tabs">
+									<li class="active">
+										<a href="#all" data-toggle="tab">总体</a>
+									</li>
+									<li >
+										<a href="#clothes" data-toggle="tab">衣服</a>
+									</li>
+									<li>
+										<a href="#shoes" data-toggle="tab">鞋子</a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="all"></div>
+									<div class="tab-pane" id="clothes"></div>
+									<div class="tab-pane" id="shoes">shoes</div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane" id="action-sell">
+							<p>action-sell</p>
+						</div>
+						<div class="tab-pane" id="prodict">
+							<p>prodict</p>
+						</div>
+						<div class="tab-pane" id="customer">
+							<p>customer</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- sciprt -->
+		<script src="/static/js/jquery-1.9.1.js"></script>
+		<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+		<script src="/static/peity/jquery.peity.min.js"></script>
+		<script src="/static/morris/morris.min.js"></script>
+		<script src="/static/morris/raphael-min.js"></script>
+		<script src="/static/js/base.js"></script>
+	</body>
+</html>

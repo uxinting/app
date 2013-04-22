@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Base</title>
+		<meta charset="utf-8" />
+		
+		<!-- css -->
+		<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/static/morris/morris.css" />
+		<link rel="stylesheet" href="/static/css/base.css" />
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="navbar">
+					<div class="navbar-inner">
+						<div class="brand" href="#">
+							谋商
+						</div>
+						<ul class="nav">
+							<li class="active"><a href="#">我的销售</a></li>
+							<li><a href="#">我的买家</a></li>
+							<li><a href="#">我的宝贝</a></li>
+							<li><a href="#">关于我们</a></li>
+						</ul>
+						<a href="{{ authurl }}" class="btn btn-danger pull-right">授权</a>
+						<a id="btn-login" href="#login" class="btn btn-primary pull-right" style="margin-right: 5px;">登录</a>
+						<div id="login" class="modal hide fade" tabindex="-1" role="dialog">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">x</button>
+								<h3> 登录 </h3>
+							</div>
+							<form>
+								<div class="modal-body">
+									<input type="text" placeholder="您的用户名" style="width: 90%;" /><br>
+									<input type="password" placeholder="你的密码" style="width: 90%;" />
+								</div>
+								<div class="modal-footer">
+									<input type="submit" class="btn btn-primary" value="登录" />
+									<button class="btn" data-dismiss="modal">取消</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span2">
+					{% block nav-container %}
+					{% endblock %}
+				</div>
+				<div class="span10">
+					{% block content-container %}
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+		
+		<!-- sciprt -->
+		<script src="/static/js/jquery-1.9.1.js"></script>
+		<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+		<script src="/static/peity/jquery.peity.min.js"></script>
+		<script src="/static/morris/morris.min.js"></script>
+		<script src="/static/morris/raphael-min.js"></script>
+		<script src="/static/js/base.js"></script>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+#-*- coding: utf-8 -*-
+'''
+Created on 2013-4-16
+
+@author: xinting
+'''
+from django.shortcuts import render_to_response
+import top.api
+from taobao import settings
+import base64, md5
+
+def sell(request):
+    authurl = settings.SANDBOX_AUTH
+    return render_to_response('sell.html', locals())
+
+def auth(request):
+    try:
+        top_appkey = request.GET.get('top_appkey', 'none')
+        top_session = request.GET.get('top_session', 'none')
+        top_parameters_base64 = request.GET.get('top_parameters', 'none')
+        top_parameters = base64.decode(top_parameters_base64)
+        top_sign = request.GET.get('top_sign', 'none')
+        if top_sign != base64(md5.new(top_appkey + top_parameters + top_session + settings.APPSECRET).digest()):
+            return render_to_response('sell.html', {'error': '签名未通过, 授权失败'})
+    except:
+        pass

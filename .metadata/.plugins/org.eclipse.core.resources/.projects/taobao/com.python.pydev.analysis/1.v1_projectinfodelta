@@ -1,0 +1,10 @@
+INSTUPtop.api.rest.WlbOrderscheduleruleQueryRequest
+/home/xinting/Documents/workspace/taobao/top/api/rest/WlbOrderscheduleruleQueryRequest.py
+INFOS:&&1|1|2|0&&2|3|2|1&&3|4|2|5&&3|6|2|5&&2|7|2|1
+page_size=6
+__init__=3
+WlbOrderscheduleruleQueryRequest.__init__=5
+top.api.rest.WlbOrderscheduleruleQueryRequest=2
+getapiname=7
+page_no=4
+WlbOrderscheduleruleQueryRequest=1

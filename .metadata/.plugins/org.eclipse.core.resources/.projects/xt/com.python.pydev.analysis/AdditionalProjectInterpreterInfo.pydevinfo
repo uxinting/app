@@ -1,0 +1,106 @@
+-- VERSION_3
+-- START DISKCACHE
+/home/xinting/Documents/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/xt/com.python.pydev.analysis/v1_indexcache
+.v1_indexcache
+xt.settings|0|/home/xinting/Documents/workspace/xt/xt/settings.py
+xt.urls|0|/home/xinting/Documents/workspace/xt/xt/urls.py
+-- END DISKCACHE
+-- START DICTIONARY
+25
+22=Config
+23=Branch
+20=Calligraphy
+17=RemoteFile
+5=xt.calligraphy.views
+2=xt.settings
+1=xt.about.views
+6=xt.wsgi
+3=xt.composition.views
+24=RemoteFile.__init__
+14=xt.composition.urls
+25=RemoteFile2.__init__
+15=xt.tool.urls
+16=util.picture
+19=Composition
+10=xt.urls
+8=util.HandleFile
+9=xt.views
+7=xt.models
+12=xt.calligraphy.urls
+13=xt.about.urls
+11=util.ReceiveFile
+18=RemoteFile2
+21=UserProfile
+4=xt.tool.views
+-- END DICTIONARY
+-- START TREE 1
+44
+abo|1|about!10@
+adm|1|ADMINS!19@
+aja|3|ajax!26@ajax!34@ajax!42@
+all|1|ALLOWED_HOSTS!19@
+app|1|application!51@
+aut|1|AUTH_PROFILE_MODULE!19@
+bra|1|Branch!57@
+cal|2|Calligraphy!57@CALLIGRAPHYS!43@
+com|2|Composition!57@COMPOSITIONS!27@
+con|3|contents!42@Config!57@contents!26@
+cre|1|create!26@
+dat|1|DATABASES!19@
+deb|1|DEBUG!19@
+def|1|DEFAULT_CHARSET!19@
+ema|4|EMAIL_HOST_PASSWORD!19@EMAIL_HOST_USER!19@EMAIL_PORT!19@EMAIL_HOST!19@
+fil|1|FILE_CHARSET!19@
+im|1|im!67@
+inf|1|info!67@
+ins|1|INSTALLED_APPS!19@
+lan|1|LANGUAGE_CODE!19@
+log|3|login!74@logout!74@LOGGING!19@
+man|1|MANAGERS!19@
+med|3|MEDIA_URL!19@MEDIA_ROOT!19@mediaurlpatterns!83@
+mes|1|message!74@
+mid|1|MIDDLEWARE_CLASSES!19@
+pic|1|picture!34@
+reg|1|register!74@
+rem|2|RemoteFile!89@RemoteFile2!89@
+roo|1|ROOT_URLCONF!19@
+sec|1|SECRET_KEY!19@
+ser|2|SERVER_EMAIL!19@server!67@
+ses|1|SESSION_EXPIRE_AT_BROWSER_CLOSE!19@
+sho|2|show!26@show!42@
+sit|1|SITE_ID!19@
+sta|5|staticurlpatterns!83@STATIC_URL!19@STATICFILES_FINDERS!19@STATICFILES_DIRS!19@STATIC_ROOT!19@
+tem|3|TEMPLATE_LOADERS!19@TEMPLATE_DEBUG!19@TEMPLATE_DIRS!19@
+tim|1|TIME_ZONE!19@
+too|1|tools!34@
+upl|1|upload!34@
+url|5|urlpatterns!99@urlpatterns!83@urlpatterns!107@urlpatterns!115@urlpatterns!123@
+use|4|USE_TZ!19@USE_L10N!19@UserProfile!57@USE_I18N!19@
+wat|1|watermark!130@
+wel|1|welcome!74@
+wsg|1|WSGI_APPLICATION!19@
+-- END TREE
+-- START TREE 2
+21
+__i|2|__init__!17&90@__init__!18&90@
+__u|5|__unicode__!19&58@__unicode__!20&58@__unicode__!21&58@__unicode__!22&58@__unicode__!23&58@
+aut|2|author!19&59@author!20&59@
+dat|2|date!19&59@date!20&59@
+des|1|description!20&59@
+fav|1|favor!21&59@
+fil|2|filename!19&59@filename!20&59@
+lim|1|limit!22&59@
+maj|1|major!21&59@
+max|1|maxim!21&59@
+nam|1|name!23&59@
+pat|2|path!24&91@path!25&91@
+per|1|personal!21&59@
+rec|1|receive!18&90@
+reg|1|registered!22&59@
+req|2|request!24&91@request!25&91@
+res|1|responsehtml!23&59@
+run|1|run!17&90@
+sum|1|summary!23&59@
+typ|2|type!24&91@type!25&91@
+use|1|user!21&59@
+-- END TREE

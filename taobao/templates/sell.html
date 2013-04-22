@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block nav-container %}
+<ul class="nav nav-tabs nav-stacked">
+<li class="active">
+	<a href="#sell" data-toggle="tab">销量</a>
+</li>
+<li><a href="#turnover" data-toggle="tab">营业额</a></li>
+<li><a href="#cost" data-toggle="tab">成本</a></li>
+<li><a href="#profit" data-toggle="tab">利润</a></li>
+</ul>
+{% endblock %}
+
+{% block content-container %}
+<div class="tab-content">
+	<div class="tab-pane active" id="sell">
+		<div class="tabbable">
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a href="#all" data-toggle="tab">概览</a>
+				</li>
+				<li >
+					<a href="#clothes" data-toggle="tab">衣服</a>
+				</li>
+				<li>
+					<a href="#shoes" data-toggle="tab">鞋子</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="all"></div>
+				<div class="tab-pane" id="clothes"></div>
+				<div class="tab-pane" id="shoes">shoes</div>
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane" id="turnover">
+		<p>action-sell</p>
+	</div>
+	<div class="tab-pane" id="cost">
+		<p>prodict</p>
+	</div>
+	<div class="tab-pane" id="profit">
+		<p>customer</p>
+	</div>
+</div>
+{% endblock %}

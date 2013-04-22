@@ -1,0 +1,9 @@
+INSTUPtop.api.rest.WlbOrderstatusGetRequest
+/home/xinting/Documents/workspace/taobao/top/api/rest/WlbOrderstatusGetRequest.py
+INFOS:&&1|1|2|0&&2|3|2|1&&3|4|2|5&&2|6|2|1
+__init__=3
+WlbOrderstatusGetRequest.__init__=5
+top.api.rest.WlbOrderstatusGetRequest=2
+WlbOrderstatusGetRequest=1
+getapiname=6
+order_code=4

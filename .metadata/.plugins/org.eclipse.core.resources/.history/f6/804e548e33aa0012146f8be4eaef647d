@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+<<<<<<< HEAD
+encoding//taobao/models.py=utf-8
+encoding//taobao/settings.py=utf-8
+=======
+>>>>>>> 2b3318177d42cd197edbcb8e6a4ac45c40893cf1
+encoding//taobao/views.py=utf-8
