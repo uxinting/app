@@ -23,8 +23,8 @@
 							<li><a href="#">我的宝贝</a></li>
 							<li><a href="#">关于我们</a></li>
 						</ul>
-						{% if request.user.is_authenticate %}
-						<div class="label label-success pull-right">{{ request.user.username }}</div>
+						{% if request.user.is_authenticated %}
+						<a class="btn btn-link pull-right" href="/auth/logout">{{ request.user.username }}</a>
 						{% else %}
 						<a id="btn-login" href="#login" class="btn btn-primary pull-right" data-toggle="modal">登录 &bull; 授权</a>
 						<div id="login" class="modal hide fade" tabindex="-1" role="dialog">
@@ -60,6 +60,7 @@
 		</div>
 		
 		<!-- sciprt -->
+		{% block script %}{% endblock %}
 		<script src="/static/js/jquery-1.9.1.js"></script>
 		<script src="/static/bootstrap/js/bootstrap.min.js"></script>
 		<script src="/static/peity/jquery.peity.min.js"></script>

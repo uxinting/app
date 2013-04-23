@@ -19,22 +19,14 @@
 				<li class="active">
 					<a href="#all" data-toggle="tab">概览</a>
 				</li>
-				<li >
-					<a href="#clothes" data-toggle="tab">衣服</a>
-				</li>
-				<li>
-					<a href="#shoes" data-toggle="tab">鞋子</a>
-				</li>
 			</ul>
 			<div class="tab-content">
-				<div class="tab-pane active" id="all"></div>
-				<div class="tab-pane" id="clothes"></div>
-				<div class="tab-pane" id="shoes">shoes</div>
+				<div class="tab-pane active" id="sellcount"></div>
 			</div>
 		</div>
 	</div>
 	<div class="tab-pane" id="turnover">
-		<p>action-sell</p>
+		<div class="tab-pane active" id="turnovercount"></div>
 	</div>
 	<div class="tab-pane" id="cost">
 		<p>prodict</p>
@@ -43,4 +35,14 @@
 		<p>customer</p>
 	</div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+	var sell_data = [
+		{% for item in sell %}
+			{ time: '{{ item.0 }}', sum: {{ item.1 }} }{% if not forloop.last %},{% endif %}
+		{% endfor %}
+	];
+</script>
 {% endblock %}

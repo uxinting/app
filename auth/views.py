@@ -13,7 +13,7 @@ import base64
 from taobao.models import UserProfile
 import urlparse
 from django.template.context import RequestContext
-from django.contrib import auth
+from django.contrib import auth as pyauth
 
 def auth(request):
     try:
@@ -30,7 +30,7 @@ def auth(request):
             return render_to_response('error.html', {'error': '签名未通过, 授权失败'}) 
     except Exception, e:
         return render_to_response('error.html', {'from': 'auth', 'error': repr(e)})
-    return render_to_response('password.html', {}, context_instance=RequestContext(request))
+    return render_to_response('auth/password.html', {}, context_instance=RequestContext(request))
 
 def password(request):
     try:
@@ -39,16 +39,15 @@ def password(request):
         
         #添加用户
         nick = top_parameters['visitor_nick'][0]
-        pw = request.POST['password']        
-        print nick, pw 
+        pw = request.POST['password']
         #直接登录
-        #User.objects.create_user(username=nick, password=pw).save()
-        user = auth.authenticate(username=nick, password=pw)
+        User.objects.create_user(username=nick, password=pw).save()
+        user = pyauth.authenticate(username=nick, password=pw)
         
         #保存sessionKeyl
         UserProfile.objects.create(user=user, sessionKey=top_session).save()
         if user is not None and user.is_active:
-            auth.login(request, user)
+            pyauth.login(request, user)
     except Exception, e:
         return render_to_response('error.html', {'from': 'password', 'error': repr(e)})
     return HttpResponseRedirect('/')
@@ -62,10 +61,17 @@ def login(request):
             User.objects.get(username=nick)
         except:
             return HttpResponseRedirect(settings.SANDBOX_AUTH)
-        print dir(auth) 
-        user = auth.authenticate(username=nick, password=password)
-        if user is not None and user.is_active:
-            auth.login(request, user)
+
+        user = pyauth.authenticate(username=nick, password=password)
+        if user is not None and user.is_active():
+            pyauth.login(request, user)
     except Exception, e:
         return render_to_response('error.html', {'error': repr(e)})
+    return HttpResponseRedirect('/')
+
+def logout(request):
+    try:
+        pyauth.logout(request)
+    except Exception, e:
+        return render_to_response('error.html', {'error': repr(e)})       
     return HttpResponseRedirect('/')

@@ -1,0 +1,9 @@
+{% extends 'html.html' %}
+
+{% block body %}
+<form action="/auth/login/" method="POST" style="width: 300px; margin: 200px auto 0;">{% csrf_token %}
+	<input type="text" placeholder="请输入您的用户名" name="username" style="width: 100%;"/><br>
+	<input type="password" placeholder="请输入您的密码" style="width: 100%;" name="password"/><br>
+	<input type="submit" class="btn btn-primary pull-right" value="登录 &bull; 授权" />
+</form>
+{% endblock %}

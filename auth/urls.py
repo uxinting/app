@@ -8,5 +8,6 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('auth.views',
                        url('^$', 'auth'),
                        url('^login/', 'login'),
+                       url('^logout/', 'logout'),
                        url('^password/', 'password'),
                        )
