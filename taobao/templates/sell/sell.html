@@ -17,7 +17,7 @@
 		<div class="tabbable">
 			<ul class="nav nav-tabs">
 				<li class="active">
-					<a href="#all" data-toggle="tab">概览</a>
+					<a href="#sellcount" data-toggle="tab">概览</a>
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -26,13 +26,13 @@
 		</div>
 	</div>
 	<div class="tab-pane" id="turnover">
-		<div class="tab-pane active" id="turnovercount"></div>
+		{% include 'sell/sell-turnover.html' %}
 	</div>
 	<div class="tab-pane" id="cost">
-		<p>prodict</p>
+		{% include 'sell/sell-cost.html' %}
 	</div>
 	<div class="tab-pane" id="profit">
-		<p>customer</p>
+		{% include 'sell/sell-profit.html' %}
 	</div>
 </div>
 {% endblock %}
@@ -42,6 +42,12 @@
 	var sell_data = [
 		{% for item in sell %}
 			{ time: '{{ item.0 }}', sum: {{ item.1 }} }{% if not forloop.last %},{% endif %}
+		{% endfor %}
+	];
+	
+	var turnover_data = [
+		{% for item in turnover %}
+			{ time: '{{ item.0 }}', total_fee: {{ item.1 }} }{% if not forloop.last %},{% endif %}
 		{% endfor %}
 	];
 </script>

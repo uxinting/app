@@ -10,7 +10,7 @@ $(function() {
 	});
 	
 
-	Morris.Line({
+	var sellcount = Morris.Line({
 	  // ID of the element in which to draw the chart.
 	  element: 'sellcount',
 	  // Chart data records -- each entry in this array corresponds to a point on
@@ -28,15 +28,22 @@ $(function() {
 	  labels: ['日销售量']
 	});
 	
-	$('[href="#turnover"]').click(function() { 
-		$('#turnovercount').append('<p>请稍候</p>');
-		$.get('/ajax?type=turnover', function(data, status) {
-			if (status == 'success') {
+	var turnovercount;
+	$('[href="#turnover"]').click(function() {
+		if (typeof(turnovercount) != 'undefined') return;
+		$('#turnovercount').append('<p class="alert alert-warn text-center">请稍候,正在处理..</p>');
+		
+		setTimeout(function() {
 			$('#turnovercount').find('p').remove();
-				alert(data);
-			} else {
-				alert('error');
-			}
-		});
+			turnovercount = Morris.Line({
+				element: 'turnovercount',
+				data: turnover_data,
+				postUnits: '￥',
+				xkey: 'time',
+				ykeys: [ 'total_fee' ],
+				labels: [ '销售额' ]
+			});
+		}, 500
+		);
 	});
 });

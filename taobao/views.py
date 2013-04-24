@@ -10,10 +10,13 @@ import top.api as topapi
 from taobao import settings
 import top
 import time
+import json
 from django.http.response import HttpResponse
 
 def sell(request):
-    if request.user is None:
+    try:
+        print request.user.get_profile().sessionKey
+    except:
         return render_to_response('auth/login.html', {}, context_instance=RequestContext(request))
         
     try:
@@ -33,6 +36,7 @@ def sell(request):
         request.session['trade'] = trade
         
         sell = {}
+        turnover = {}
         for item in trade:
             if item.get('pay_time', None) is None:
                 continue
@@ -40,21 +44,40 @@ def sell(request):
             
             try:
                 sell[key] = sell[key] + 1
+                turnover[key] = turnover[key] + float(item['total_fee'])
             except:
                 sell[key] = 1
+                turnover[key] = float(item['total_fee'])
                 
         sell = sell.items()
+        turnover = turnover.items()
             
     except Exception, e:
         return render_to_response('error.html', {'from': 'sell', 'error': repr(e)})
-    return render_to_response('sell.html', locals(), context_instance=RequestContext(request))
+    return render_to_response('sell/sell.html', locals(), context_instance=RequestContext(request))
     
 def ajax(request):
     try:
         type = request.GET['type']
         trade = request.session['trade']
-        print type, trade
+        
+        turnover = {}
+        for item in trade:
+            if item.get('pay_time', None) is None:
+                continue
+
+            key = item['pay_time'][:10]
+            
+            try:
+                turnover[key] = turnover[key] + float(item['total_fee'])
+            except:
+                turnover[key] = float(item['total_fee'])
+            
+        turnover = turnover.items()
+            
+        return HttpResponse(json.dumps(turnover))
     except Exception, e:
-        return render_to_response('error.html', {'from': 'sell', 'error': repr(e)})
+        print e
+        pass
     
-    return HttpResponse('ok')
+    return HttpResponse('error')

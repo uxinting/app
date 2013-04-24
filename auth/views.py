@@ -63,10 +63,10 @@ def login(request):
             return HttpResponseRedirect(settings.SANDBOX_AUTH)
 
         user = pyauth.authenticate(username=nick, password=password)
-        if user is not None and user.is_active():
+        if user is not None and user.is_active:
             pyauth.login(request, user)
     except Exception, e:
-        return render_to_response('error.html', {'error': repr(e)})
+        return render_to_response('error.html', {'from': 'login', 'error': repr(e)})
     return HttpResponseRedirect('/')
 
 def logout(request):
