@@ -1,6 +1,8 @@
+#Thu Apr 25 18:01:01 CST 2013
 eclipse.preferences.version=1
 encoding//auth/urls.py=utf-8
 encoding//auth/views.py=utf-8
 encoding//taobao/models.py=utf-8
 encoding//taobao/settings.py=utf-8
 encoding//taobao/views.py=utf-8
+encoding/tb.py=utf-8

@@ -11,7 +11,7 @@ from taobao import settings
 import top
 import time
 import json
-from django.http.response import HttpResponse
+from django.http import HttpResponse
 
 def sell(request):
     try:
