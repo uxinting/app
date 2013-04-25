@@ -12,46 +12,26 @@ import top
 import time
 import json
 from django.http import HttpResponse
+import tb
 
 def sell(request):
     try:
         print request.user.get_profile().sessionKey
     except:
         return render_to_response('auth/login.html', {}, context_instance=RequestContext(request))
-        
+    
+    title = u'我的销售'
     try:
         sessionKey = request.user.get_profile().sessionKey
         
-        req = topapi.TradesSoldGetRequest(settings.SANDBOX_URL)
-        req.set_app_info(top.appinfo(settings.APPKEY, settings.APPSECRET))
+        res = request.session.get('res', None)
+        if res is None:
+            trade = tb.Trade()
+            res = trade.getRes(settings.APPKEY, settings.APPSECRET, settings.SANDBOX_URL, sessionKey, options={'start_created': '2013-04-01 00:00:00'})
+            request.session['res'] = res
         
-        req.fields = 'total_fee, buyer_nick, pay_time, end_time'
-        t = list(time.gmtime())
-        t[1] = t[1] - 1
-        req.start_created = time.strftime('%Y-%m-%d %H:%M:%S', tuple(t))
-        
-        res = req.getResponse(sessionKey).get('trades_sold_get_response', '')
-        total_results = res.get('total_results', '0')
-        trade = res.get('trades', None).get('trade', None)
-        request.session['trade'] = trade
-        
-        sell = {}
-        turnover = {}
-        for item in trade:
-            if item.get('pay_time', None) is None:
-                continue
-            key = item['pay_time'][:10]
-            
-            try:
-                sell[key] = sell[key] + 1
-                turnover[key] = turnover[key] + float(item['total_fee'])
-            except:
-                sell[key] = 1
-                turnover[key] = float(item['total_fee'])
-                
-        sell = sell.items()
-        turnover = turnover.items()
-            
+        sell = res.get('trades').get('trade')[0].items()
+        orders = res.get('trades').get('trade')[0].get('orders').items()
     except Exception, e:
         return render_to_response('error.html', {'from': 'sell', 'error': repr(e)})
     return render_to_response('sell/sell.html', locals(), context_instance=RequestContext(request))
@@ -59,25 +39,14 @@ def sell(request):
 def ajax(request):
     try:
         type = request.GET['type']
-        trade = request.session['trade']
+        res = request.session['res']
         
-        turnover = {}
-        for item in trade:
-            if item.get('pay_time', None) is None:
-                continue
-
-            key = item['pay_time'][:10]
-            
-            try:
-                turnover[key] = turnover[key] + float(item['total_fee'])
-            except:
-                turnover[key] = float(item['total_fee'])
-            
-        turnover = turnover.items()
-            
-        return HttpResponse(json.dumps(turnover))
+        if type == 'sell':
+            return HttpResponse(tb.Trade(res).getSellJson())
+        
+        if type == 'turnover':
+            return HttpResponse(tb.Trade(res).getTurnoverJson())
     except Exception, e:
-        print e
         pass
     
     return HttpResponse('error')

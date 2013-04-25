@@ -14,16 +14,7 @@
 {% block content-container %}
 <div class="tab-content">
 	<div class="tab-pane active" id="sell">
-		<div class="tabbable">
-			<ul class="nav nav-tabs">
-				<li class="active">
-					<a href="#sellcount" data-toggle="tab">概览</a>
-				</li>
-			</ul>
-			<div class="tab-content">
-				<div class="tab-pane active" id="sellcount"></div>
-			</div>
-		</div>
+		{% include 'sell/sell-sell.html' %}
 	</div>
 	<div class="tab-pane" id="turnover">
 		{% include 'sell/sell-turnover.html' %}
@@ -39,16 +30,6 @@
 
 {% block script %}
 <script>
-	var sell_data = [
-		{% for item in sell %}
-			{ time: '{{ item.0 }}', sum: {{ item.1 }} }{% if not forloop.last %},{% endif %}
-		{% endfor %}
-	];
-	
-	var turnover_data = [
-		{% for item in turnover %}
-			{ time: '{{ item.0 }}', total_fee: {{ item.1 }} }{% if not forloop.last %},{% endif %}
-		{% endfor %}
-	];
+	var sell_data = [{"sell": 3, "pay_time": "2013-04-03"}];
 </script>
 {% endblock %}

@@ -4,16 +4,19 @@ import top
 
 class Trade:
     '''used for download trades information identified by sessionKey'''
-    def __init__(self):
+    def __init__(self, res=None):
         self.fields = 'seller_nick, buyer_nick, title, type, created, tid, seller_rate,seller_can_rate, buyer_rate,can_rate, status, payment, discount_fee, adjust_fee, post_fee, total_fee, pay_time, end_time, modified, consign_time, buyer_obtain_point_fee, point_fee, real_point_fee, received_payment, pic_path, num_iid, num, price, cod_fee, cod_status, shipping_type, receiver_name, receiver_state, receiver_city, receiver_district, receiver_address, receiver_zip, receiver_mobile, receiver_phone,seller_flag,alipay_id,alipay_no,is_lgtype,is_force_wlb,is_brand_sale,buyer_area,has_buyer_message, credit_card_fee, lg_aging_type, lg_aging, step_trade_status,step_paid_fee,mark_desc,has_yfx,yfx_fee,yfx_id,yfx_type,trade_source,send_time,orders'
-        self.res = None #the seller's trades set
-        self.hasTrades = False #if this class has get the set
+        self.res = res #the seller's trades set
+        self.hasRes = False #if this class has get the set
         self.sell = None #set's sell per day
         self.turnover = None #set's turnover per day
         self.cost = None #set's cost per day
         self.profit = None #set's profit per day
 
-    def getTrades(self, appkey, appSecret, url, sessionKey, options={}):
+    def getRes(self, appkey, appSecret, url, sessionKey, options={}):
+        if self.res is not None:
+            return self.res
+
         import time
         if options.get('start_created', None) is None:
             t = list(time.gmtime())
@@ -34,14 +37,14 @@ class Trade:
                     setattr(req, k, v)
 
             self.res = req.getResponse(sessionKey).get('trades_sold_get_response')
-            self.hasTrades = True
-            return self.res.get('trades').get('trade')
+            self.hasRes = True
+            return self.res
         except Exception, e:
             print e
 
     def getTotalResults(self):
         if self.res is None:
-            raise Exception("You havn't a trades set")
+            raise Exception("You havn't a res set")
         else:
             return self.res.get('total_results')
 
@@ -85,7 +88,7 @@ class Trade:
             sellJson.append({'pay_time': k, 'sell': v})
         
         import json
-        return json.dump(sellJson)
+        return json.dumps(sellJson)
     
     def getTurnover(self, interval='day'):
         if self.turnover is not None:
@@ -128,7 +131,4 @@ class Trade:
             turnoverJson.append({'pay_time': k, 'turnover': v})
         
         import json
-        return json.dump(turnoverJson)
-
-    def showTrades(self):
-        print self.res
+        return json.dumps(turnoverJson)

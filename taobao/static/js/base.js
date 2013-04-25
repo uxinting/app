@@ -7,43 +7,57 @@ $(function() {
 		'trigger': 'hover focus',
 		'delay': 0,
 		'container': false
-	});
+	}); //tooltip
 	
+	var sellcount;
+	$.get('/ajax?type=sell', function(jsondata, status) {
+		if (typeof(sellcount) != 'undefined') return;
+		$('#sellcount').append('<p class="alert alert-warn text-center">请稍候,正在请求数据..</p>');
 
-	var sellcount = Morris.Line({
-	  // ID of the element in which to draw the chart.
-	  element: 'sellcount',
-	  // Chart data records -- each entry in this array corresponds to a point on
-	  // the chart.
-	  data: sell_data,
-	  goals: [
-	  	40
-	  ],
-	  // The name of the data record attribute that contains x-clothess.
-	  xkey: 'time',
-	  // A list of names of data record attributes that contain y-clothess.
-	  ykeys: ['sum' ],
-	  // Labels for the ykeys -- will be displayed when you hover over the
-	  // chart.
-	  labels: ['日销售量']
-	});
+		if (status == 'success') {
+			if (jsondata == 'error') {
+					$('#turnovercount').find('p').text('请求数据失败！');
+			}
+			
+			$('#sellcount').find('p').remove();
+			
+			sellcount = Morris.Line({
+				element: 'sellcount',
+				data: JSON.parse(jsondata),
+				xkey: 'pay_time',
+				ykeys: [ 'sell' ],
+				labels: [ '销量' ]
+			});
+		} else {
+			$('#sellcount').find('p').text('请求数据数据失败！');
+		}
+	}); //ajax sell get
 	
 	var turnovercount;
 	$('[href="#turnover"]').click(function() {
-		if (typeof(turnovercount) != 'undefined') return;
-		$('#turnovercount').append('<p class="alert alert-warn text-center">请稍候,正在处理..</p>');
+		$.get('/ajax?type=turnover', function(jsondata, status) {
+			if (typeof(turnovercount) != 'undefined') return;
+			$('#turnovercount').append('<p class="alert alert-warn text-center">请稍候,正在请求数据..</p>');
 		
-		setTimeout(function() {
-			$('#turnovercount').find('p').remove();
-			turnovercount = Morris.Line({
-				element: 'turnovercount',
-				data: turnover_data,
-				postUnits: '￥',
-				xkey: 'time',
-				ykeys: [ 'total_fee' ],
-				labels: [ '销售额' ]
-			});
-		}, 500
-		);
-	});
+			if (status == 'success') {
+				if (jsondata == 'error') {
+					$('#turnovercount').find('p').text('请求数据失败！');
+				}
+				
+				$('#turnovercount').find('p').remove();
+				
+				turnovercount = Morris.Line({
+					element: 'turnovercount',
+					data: JSON.parse(jsondata),
+					postUnits: '￥',
+					xkey: 'pay_time',
+					ykeys: [ 'turnover' ],
+					labels: [ '销售额' ]
+				});
+			} else {
+				$('#turnovercount').find('p').text('请求数据数据失败！');
+			}
+		});
+	}); //turnover click
+	
 });

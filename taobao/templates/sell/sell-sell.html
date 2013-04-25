@@ -1,0 +1,35 @@
+<div class="tabbable">
+	<ul class="nav nav-tabs">
+		<li class="active">
+			<a href="#sellcount" data-toggle="tab">概览</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane active" id="sellcount"></div>
+		<table class="table table-hover">
+			<caption>{{ res.total_results }}</caption>
+			<thead>
+				<tr>
+					<th>prop</th>
+					<th>value</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in sell %}
+					{% ifnotequal item.0 'orders' %}
+						<tr>
+							<th>{{ item.0 }}</th>
+							<th>{{ item.1 }}</th>
+						</tr>
+					{% endifnotequal %}
+				{% endfor %}
+				{% for item in orders %}
+					<tr>
+						<th>{{ item.0 }}</th>
+						<th>{{ item.1 }}</th>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
