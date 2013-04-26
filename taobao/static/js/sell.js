@@ -1,16 +1,17 @@
 $(function() {
 
+	$('[href="/"]').parent().addClass('active');
+
 	var sellcount;
 	$.get('/sell/ajax?type=sell', function(jsondata, status) {
 		if (typeof(sellcount) != 'undefined') return;
-		$('#sellcount').append('<p class="alert alert-warn text-center">请稍候,正在请求数据..</p>');
+		$('#base-info').text('请稍候,正在请求数据..').show();
 
 		if (status == 'success') {
-			if (jsondata == 'error') {
-					$('#turnovercount').find('p').text('请求数据失败！');
+			$('#base-info').hide();
+			if (jsondata.indexOf('error') != -1) {
+				$('#base-error').text('请求数据失败！').show();
 			}
-			
-			$('#sellcount').find('p').remove();
 			
 			sellcount = Morris.Line({
 				element: 'sellcount',
@@ -20,22 +21,21 @@ $(function() {
 				labels: [ '销量' ]
 			});
 		} else {
-			$('#sellcount').find('p').text('请求数据数据失败！');
+			$('#base-error').text('请求数据数据失败！').show();
 		}
 	}); //ajax sell get
 	
 	var turnovercount;
 	$('[href="#turnover"]').click(function() {
-		$.get('/ajax?type=turnover', function(jsondata, status) {
+		$.get('/sell/ajax?type=turnover', function(jsondata, status) {
 			if (typeof(turnovercount) != 'undefined') return;
-			$('#turnovercount').append('<p class="alert alert-warn text-center">请稍候,正在请求数据..</p>');
+			$('#base-info').text('请稍候,正在请求数据..').show();
 		
 			if (status == 'success') {
-				if (jsondata == 'error') {
-					$('#turnovercount').find('p').text('请求数据失败！');
+				$('#base-info').hide();
+				if (jsondata.indexOf('error') != -1) {
+					$('#base-error').text('请求数据失败！').show();
 				}
-				
-				$('#turnovercount').find('p').remove();
 				
 				turnovercount = Morris.Line({
 					element: 'turnovercount',
@@ -46,7 +46,7 @@ $(function() {
 					labels: [ '销售额' ]
 				});
 			} else {
-				$('#turnovercount').find('p').text('请求数据数据失败！');
+				$('#base-error').text('请求数据数据失败！').show();
 			}
 		});
 	}); //turnover click

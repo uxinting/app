@@ -5,23 +5,36 @@ Created on 2013-4-26
 @author: xinting
 '''
 from django.shortcuts import render_to_response
-from tb import Buyer
 from taobao import settings
+from django.http.response import HttpResponse
+import tb
 
 def buyer(request):
     title = u'我的买家'
-    
-    sessionKey = request.user.get_profile().sessionKey
-    if request.session.get('trade', None) is None:
-        buyer = Buyer(request.session)
-        buyers = buyer.getBuyers(settings.APPKEY, settings.APPSECRET, settings.SANDBOX_URL, sessionKey, options={'start_created': '2013-04-01 00:00:00'})
-        request.session['trade'] = buyer.getTrade()
-        request.session['buyer'] = buyers
-    return render_to_response('buyer/buyer-buyer.html', locals())
+    try:
+        sessionKey = request.user.get_profile().sessionKey
+    except:
+        error = u"您还没有登录.."
+    return render_to_response('buyer/buyer.html', locals())
 
 def ajax(request):
+    if request.session.get('hasData', False) is False:
+        try:
+            sessionKey = request.user.get_profile().sessionKey
+        except:
+            error = 'error: ' + u'获取授权密钥失败'
+        
+        options = {}
+        options['appkey'] = settings.APPKEY
+        options['appsecret'] = settings.APPSECRET
+        options['sessionKey'] = sessionKey
+        options['url'] = settings.SANDBOX_URL
+        
     try:
         type = request.GET['type']
-        trade = request.session['trade']
-    except:
-        pass
+        
+        if type == 'buyer':
+            return HttpResponse(tb.Buyers(session=request.session, options=options).getBuyerJson())
+    except Exception, e:
+        error = 'error:' + repr(e)
+    return HttpResponse(error)
