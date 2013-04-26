@@ -48,9 +48,27 @@ class Trade:
         else:
             return self.res.get('total_results')
 
-    def getSell(self, interval='day'):
+    def getTrade(self):
+        if self.res is None:
+            raise Exception("You havn't a res set")
+        else:
+            return self.res.get('trades').get('trade')
+        
+    def getOrder(self):
+        if self.res is None:
+            raise Exception("You havn't a res set")
+        else:
+            return self.res.get('trades').get('trade')[0].get('orders').get('order')
+
+    def getSell(self, interval='day', trade=None):
         if self.sell is not None:
             return self.sell
+        
+        if self.res is not None:
+            trade = self.res.get('trades').get('trade')
+            
+        if self.res is None and trade is None:
+            raise Exception("You havn't a res or trade set, run getRes")
 
         pace = 10
         if interval == 'month':
@@ -59,7 +77,6 @@ class Trade:
         try:
             sell = {}
             turnover = {}
-            trade = self.res.get('trades').get('trade')
             for item in trade:
                 if item.get('pay_time', None) is None:
                     continue
@@ -79,9 +96,9 @@ class Trade:
             print e
             return None
         
-    def getSellJson(self, interval='day'):
+    def getSellJson(self, interval='day', trade=None):
         if self.sell is None:
-            self.getSell(interval)
+            self.getSell(interval, trade)
         
         sellJson = []
         for k,v in self.sell.items():
@@ -90,10 +107,16 @@ class Trade:
         import json
         return json.dumps(sellJson)
     
-    def getTurnover(self, interval='day'):
+    def getTurnover(self, interval='day', trade=None):
         if self.turnover is not None:
             return self.turnover
 
+        if self.res is not None:
+            trade = self.get('trades').get('trade')
+
+        if self.res is None and trade is None:
+            raise Exception("You havn't a res or trade set, run getRes()")
+        
         pace = 10
         if interval == 'month':
             pace = 7
@@ -101,7 +124,6 @@ class Trade:
         try:
             sell = {}
             turnover = {}
-            trade = self.res.get('trades').get('trade')
             for item in trade:
                 print item
                 if item.get('pay_time', None) is None:
@@ -122,9 +144,9 @@ class Trade:
             print e
             return None
     
-    def getTurnoverJson(self, interval='day'):
+    def getTurnoverJson(self, interval='day', trade=None):
         if self.turnover is None:
-            self.getTurnover(interval)
+            self.getTurnover(interval, trade)
         
         turnoverJson = []
         for k,v in self.turnover.items():
@@ -132,3 +154,73 @@ class Trade:
         
         import json
         return json.dumps(turnoverJson)
+
+class Buyer:
+    '''buyer of seller'''
+    def __init__(self, session=None):
+        self.session = session
+        self.trade = None
+        self.buyers = None
+        
+    def getBuyers(self, appkey, appSecret, url, sessionKey, options={}):
+        if self.session is not None:
+            return self.getBuyersFromSession(self.session)
+        
+        res = Trade().getRes(appkey, appSecret, url, sessionKey, options)
+        trade = res.get('trades').get('trade')
+        
+        self.trade = trade
+        
+        self.session = {}
+        self.session['trade'] = trade
+        return self.getBuyersFromSession(self.session)
+    
+    def getTrade(self):
+        return self.trade
+    
+    def getBuyersFromSession(self, session=None):
+        if self.session is None:
+            if self.session is None:
+                self.session = session
+            else:
+                raise Exception("You havn't a session or trades set")
+        
+        trade = session.get('trade', None)
+        if trade is None:
+            try:
+                trade = session.get('res').get('trades').get('trade')
+            except:
+                raise Exception("session has no set avilable")
+        
+        buyer = {}
+        for item in trade:
+            key = item.get('buyer_nick', None)
+            if key is None:
+                continue
+
+            info = { 'sell': 0, 'total_fee': 0, 'pay_time': ''}
+            try:
+                info['sell'] = info['sell'] + item.get('num', 0)
+                info['total_fee'] = info['total_fee'] + float(item.get('total_fee'), 0.0)
+                info['pay_time'] = item.get('pay_time', 'Wait buyer to pay')
+                buyer[key] = info
+            except:
+                return None
+        
+        self.buyers = buyer
+        return buyer
+    
+    def getBuyersJson(self, session=None):
+        if session is None:
+            pass
+        buyers = []
+        for k,v in self.buyers.items():
+            info = { 'buyer_nick': k}
+            for vk,vv in v.items():
+                info[vk] = vv
+            buyers.append(info)
+        
+        import json
+        return json.dumps(buyers)
+            
+        

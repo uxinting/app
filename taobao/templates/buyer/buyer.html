@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block nav-container %}
+<ul class="nav nav-tabs nav-stacked">
+<li class="active">
+	<a href="#buyer" data-toggle="tab">买家</a>
+</li>
+</ul>
+{% endblock %}
+
+{% block content-container %}
+<div class="tab-content">
+	<div class="tab-pane active" id="buyer">
+		{% include 'buyer/buyer-buyer.html' %}
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="/static/js/buyer.js"></script>
+{% endblock %}

@@ -24,14 +24,16 @@ def sell(request):
     try:
         sessionKey = request.user.get_profile().sessionKey
         
-        res = request.session.get('res', None)
-        if res is None:
-            trade = tb.Trade()
-            res = trade.getRes(settings.APPKEY, settings.APPSECRET, settings.SANDBOX_URL, sessionKey, options={'start_created': '2013-04-01 00:00:00'})
-            request.session['res'] = res
+        trade = request.session.get('trade', None)
+        if trade is None:
+            res = tb.Trade().getRes(settings.APPKEY, settings.APPSECRET, settings.SANDBOX_URL, sessionKey, options={'start_created': '2013-04-01 00:00:00'})
+            trade = res.get('trades').get('trade')
+            total_results = res.get('total_results', 0)
+            request.session['total_results'] = total_results
+            request.session['trade'] = trade
         
-        sell = res.get('trades').get('trade')[0].items()
-        orders = res.get('trades').get('trade')[0].get('orders').items()
+        sell = trade[0].items()
+        orders = trade[0].get('orders').get('order')[0].items()
     except Exception, e:
         return render_to_response('error.html', {'from': 'sell', 'error': repr(e)})
     return render_to_response('sell/sell.html', locals(), context_instance=RequestContext(request))
@@ -39,13 +41,13 @@ def sell(request):
 def ajax(request):
     try:
         type = request.GET['type']
-        res = request.session['res']
+        trade = request.session['trade']
         
         if type == 'sell':
-            return HttpResponse(tb.Trade(res).getSellJson())
+            return HttpResponse(tb.Trade().getSellJson(trade=trade))
         
         if type == 'turnover':
-            return HttpResponse(tb.Trade(res).getTurnoverJson())
+            return HttpResponse(tb.Trade().getTurnoverJson(trade=trade))
     except Exception, e:
         pass
     

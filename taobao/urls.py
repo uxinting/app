@@ -7,8 +7,9 @@ from taobao import settings
 
 urlpatterns = patterns('taobao.views',
                        url(r'^$', 'sell'),
-                       url(r'^ajax', 'ajax'),
+                       url(r'^sell/ajax', 'ajax'),
                        (r'^auth/', include('auth.urls')),
+                       (r'^buyer/', include('buyer.urls')),
     # Examples:
     # url(r'^$', 'taobao.views.home', name='home'),
     # url(r'^taobao/', include('taobao.foo.urls')),
