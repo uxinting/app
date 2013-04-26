@@ -5,13 +5,13 @@ $(function() {
 	var buyercount;
 	$.get('/buyer/ajax?type=buyer', function(jsondata, status) {
 		if (typeof(buyercount) != 'undefined') return;
-		$('#base-info').text('请稍候，正在请求数据..').show();
+		$('#base-warn').text('请稍候，正在请求数据..').show();
 
 		if (status == 'success') {
-			$('#base-info').hide();
+			$('#base-warn').hide();
 			
 			if (jsondata.indexOf('error') != -1) {
-				$('#base-error').text(jsondata);
+				$('#base-error').text(jsondata).show();
 				return;
 			}
 			
@@ -24,7 +24,7 @@ $(function() {
 				barColors: [ 'blue', 'green' ]
 			});
 		} else {
-			$('#base-error').text('请求数据数据失败！');
+			$('#base-error').text('请求数据数据失败！').show();
 		}
 	}); //ajax sell get
 });

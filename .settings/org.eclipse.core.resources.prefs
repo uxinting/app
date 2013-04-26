@@ -1,3 +1,4 @@
+#Fri Apr 26 21:09:03 CST 2013
 eclipse.preferences.version=1
 encoding//auth/urls.py=utf-8
 encoding//auth/views.py=utf-8
@@ -5,5 +6,7 @@ encoding//buyer/urls.py=utf-8
 encoding//buyer/views.py=utf-8
 encoding//taobao/models.py=utf-8
 encoding//taobao/settings.py=utf-8
+encoding//taobao/static/js/sell.js=UTF-8
+encoding//taobao/templates/base.html=UTF-8
 encoding//taobao/views.py=utf-8
 encoding/tb.py=utf-8

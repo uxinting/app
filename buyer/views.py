@@ -6,7 +6,7 @@ Created on 2013-4-26
 '''
 from django.shortcuts import render_to_response
 from taobao import settings
-from django.http.response import HttpResponse
+from django.http import HttpResponse
 import tb
 
 def buyer(request):
@@ -18,13 +18,13 @@ def buyer(request):
     return render_to_response('buyer/buyer.html', locals())
 
 def ajax(request):
+    options = {}
     if request.session.get('hasData', False) is False:
         try:
             sessionKey = request.user.get_profile().sessionKey
         except:
             error = 'error: ' + u'获取授权密钥失败'
         
-        options = {}
         options['appkey'] = settings.APPKEY
         options['appsecret'] = settings.APPSECRET
         options['sessionKey'] = sessionKey

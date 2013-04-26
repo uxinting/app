@@ -6,7 +6,7 @@ Created on 2013-4-22
 '''
 from django.shortcuts import render_to_response
 from django.contrib.auth.models import User
-from django.http.response import HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from taobao import settings
 from hashlib import md5
 import base64

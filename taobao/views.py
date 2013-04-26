@@ -15,18 +15,19 @@ def sell(request):
     try:
         sessionKey = request.user.get_profile().sessionKey
     except:
-        error = u'您还没有登录..'
+        info = u'您还没有登录..'
 
     return render_to_response('sell/sell.html', locals(), context_instance=RequestContext(request))
     
 def ajax(request):
+    options = {}
     if request.session.get('hasData', False) is False:
         try:
             sessionKey = request.user.get_profile().sessionKey
         except:
-            return HttpResponse(u'error: 获取授权密钥失败')
-        
-        options = {}
+            error = u'error: 获取授权密钥失败'
+            return HttpResponse(error)
+
         options['appkey'] = settings.APPKEY
         options['appsecret'] = settings.APPSECRET
         options['sessionKey'] = sessionKey
@@ -40,6 +41,6 @@ def ajax(request):
         if type == 'turnover':
             return HttpResponse(tb.Trades(session=request.session, options=options).getTurnoverJson())
     except Exception, e:
-        pass
+        error = 'error: ' + repr(e)
     
-    return HttpResponse(u'error: 获取数据失败')
+    return HttpResponse(error)

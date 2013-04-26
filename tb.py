@@ -18,7 +18,7 @@ class Trades:
                 import time
                 if options.get('start_created', None) is None:
                     t = list(time.gmtime())
-                    t[1] = t[1] - 3
+                    t[1] = t[1] - 1
                     options['start_created'] = time.strftime('%Y-%m-%d %H:%M:%S', tuple(t))
         
                 if options.get('end_created', None) is None:
@@ -33,16 +33,16 @@ class Trades:
                 for k, v in options.items():
                     if hasattr(req, k):
                         setattr(req, k, v)
-                
-                res = req.getResponse(sessionKey)
+
+                res = req.getResponse(sessionKey).get('trades_sold_get_response')
                 session['trade'] = res.get('trades').get('trade')
                 session['total_results'] = res.get('total_results')
                 session['hasData'] = True
-            except:
-                raise Exception("Invalid options!")
+            except Exception, e:
+                raise Exception(repr(e))
         self.session = session
         
-    def getTotalResults(self):
+    def getTotalResults(self): 
         return self.session.get('total_results', 0)
     
     def __getSell(self, interval='day'):

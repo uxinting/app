@@ -1,16 +1,18 @@
 $(function() {
-
 	$('[href="/"]').parent().addClass('active');
-
+	$('#base-info').hide();
+	$('#base-warn').hide();
+	$('#base-error').hide();
+	
 	var sellcount;
 	$.get('/sell/ajax?type=sell', function(jsondata, status) {
 		if (typeof(sellcount) != 'undefined') return;
-		$('#base-info').text('请稍候,正在请求数据..').show();
+		$('#base-warn').text('请稍候，正在请求数据..').show();
 
 		if (status == 'success') {
-			$('#base-info').hide();
+			$('#base-warn').hide();
 			if (jsondata.indexOf('error') != -1) {
-				$('#base-error').text('请求数据失败！').show();
+				$('#base-error').text(josndata).show();
 			}
 			
 			sellcount = Morris.Line({
@@ -21,7 +23,7 @@ $(function() {
 				labels: [ '销量' ]
 			});
 		} else {
-			$('#base-error').text('请求数据数据失败！').show();
+			$('#base-error').text('服务器错误').show();
 		}
 	}); //ajax sell get
 	
@@ -29,12 +31,12 @@ $(function() {
 	$('[href="#turnover"]').click(function() {
 		$.get('/sell/ajax?type=turnover', function(jsondata, status) {
 			if (typeof(turnovercount) != 'undefined') return;
-			$('#base-info').text('请稍候,正在请求数据..').show();
+			$('#base-warn').text('请稍候，正在请求数据..').show();
 		
 			if (status == 'success') {
-				$('#base-info').hide();
+				$('#base-warn').hide();
 				if (jsondata.indexOf('error') != -1) {
-					$('#base-error').text('请求数据失败！').show();
+					$('#base-error').text(jsondata).show();
 				}
 				
 				turnovercount = Morris.Line({
@@ -46,7 +48,7 @@ $(function() {
 					labels: [ '销售额' ]
 				});
 			} else {
-				$('#base-error').text('请求数据数据失败！').show();
+				$('#base-error').text('服务器出错').show();
 			}
 		});
 	}); //turnover click
