@@ -2,12 +2,13 @@
 <html>
 	<head>
 		<title>{{ title }}</title>
-		<meta content="text/html" charset="utf-8" />
+		<meta http-equiv="content-type" content="text/html" charset="utf-8" />
 		
 		<!-- css -->
 		<link rel="shortcut icon" href="/static/img/favicon.ico" />
 		<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/static/morris/morris.css" />
+		{% block css %}{% endblock %}
 		<link rel="stylesheet" href="/static/css/base.css" />
 	</head>
 	<body>
@@ -21,8 +22,8 @@
 						<ul class="nav">
 							<li><a href="/">我的销售</a></li>
 							<li><a href="/buyer">我的买家</a></li>
-							<li><a href="#">我的宝贝</a></li>
-							<li><a href="#">关于我们</a></li>
+							<li><a href="/product">我的宝贝</a></li>
+							<li><a href="/about">关于我们</a></li>
 						</ul>
 						{% if request.user.is_authenticated %}
 						<a class="btn btn-link pull-right" href="/auth/logout">{{ request.user.username }}</a>
@@ -75,7 +76,6 @@
 		<!-- sciprt -->
 		<script src="/static/js/jquery-1.9.1.js"></script>
 		<script src="/static/bootstrap/js/bootstrap.min.js"></script>
-		<script src="/static/peity/jquery.peity.min.js"></script>
 		<script src="/static/morris/morris.min.js"></script>
 		<script src="/static/morris/raphael-min.js"></script>
 		<script src="/static/js/base.js"></script>

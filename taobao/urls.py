@@ -10,6 +10,8 @@ urlpatterns = patterns('taobao.views',
                        url(r'^sell/ajax', 'ajax'),
                        (r'^auth/', include('auth.urls')),
                        (r'^buyer/', include('buyer.urls')),
+                       (r'^product/', include('product.urls')),
+                       (r'^about/', include('about.urls')),
     # Examples:
     # url(r'^$', 'taobao.views.home', name='home'),
     # url(r'^taobao/', include('taobao.foo.urls')),

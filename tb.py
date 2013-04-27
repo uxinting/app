@@ -158,3 +158,46 @@ class Buyers:
         import json
         return json.dumps(buyers)
             
+class Products:
+    '''User for user's products option'''
+    def __init__(self, session, options):
+        ''' If session is None,options must has keys include "appkey, appsecret, url, sessionKey"'''
+        if session.get('product', None) is None:
+            try:
+                appkey = options['appkey']
+                appsecret = options['appsecret']
+                url = options['url']
+                sessionKey = options['sessionKey']
+                
+                if options.get('parent_cid', None) is None:
+                    options['parent_cid'] = 0
+                    
+                if options.get('fields', None) is None:
+                    options['fields'] = 'cid, parent_cid, name, is_parent'
+
+                req = top.api.ItemcatsGetRequest(url)
+                req.set_app_info(top.appinfo(appkey, appsecret))
+                
+                for k, v in options.items():
+                    if hasattr(req, k):
+                        setattr(req, k, v)
+
+                res = req.getResponse(sessionKey).get('itemcats_get_response')
+                session['product'] = res
+            except Exception, e:
+                raise Exception(repr(e))
+        
+        self.session = session
+        
+    def getProductJson(self):
+        try:
+            product = self.session.get('product').get('item_cats').get('item_cat')
+            
+            products = []
+            for p in product:
+                products.append({'id': p['cid'], 'pId': p['parent_cid'], 'name': p['name']})
+                
+            import json
+            return json.dumps(products)
+        except:
+            pass
