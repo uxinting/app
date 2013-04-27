@@ -1,8 +1,5 @@
 $(function() {
 	$('[href="/"]').parent().addClass('active');
-	$('#base-info').hide();
-	$('#base-warn').hide();
-	$('#base-error').hide();
 	
 	var sellcount;
 	$.get('/sell/ajax?type=sell', function(jsondata, status) {

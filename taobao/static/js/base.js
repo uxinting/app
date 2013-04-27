@@ -9,7 +9,4 @@ $(function() {
 		'container': false
 	}); //tooltip
 	
-	$('#base-info').hide();
-	$('#base-warn').hide();
-	$('#base-error').hide();
 });

@@ -2,9 +2,10 @@
 <html>
 	<head>
 		<title>{{ title }}</title>
-		<meta charset="utf-8" />
+		<meta content="text/html" charset="utf-8" />
 		
 		<!-- css -->
+		<link rel="shortcut icon" href="/static/img/favicon.ico" />
 		<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/static/morris/morris.css" />
 		<link rel="stylesheet" href="/static/css/base.css" />
@@ -47,15 +48,15 @@
 					</div>
 				</div>
 			</div>
-			<div id="base-info" class="alert alert-info">
+			<div id="base-info" class="alert alert-info {% if not info %}hide{% endif %}">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				{{ info }}
 			</div>
-			<div id="base-warn" class="alert alert-warn">
+			<div id="base-warn" class="alert alert-warn {% if not warn %}hide{% endif %}">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				{{ warn }}
 			</div>
-			<div id="base-error" class="alert alert-error">
+			<div id="base-error" class="alert alert-error {% if not error %}hide{% endif %}">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				{{ error }}
 			</div>
