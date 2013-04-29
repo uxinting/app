@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<!-- <link rel="stylesheet" href="/static/zTree/css/demo.css" /> -->
+<link rel="stylesheet" href="/static/zTree/css/zTreeStyle/zTreeStyle.css" />
+{% endblock %}
+
+{% block nav-container %}
+<ul class="nav nav-tabs nav-stacked">
+	<li class="active">
+		<a href="#product" data-toggle="tab">宝贝</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block content-container %}
+<div class="tab-content">
+	<div class="tab-pane active">
+		{% include 'product/product-product.html' %}
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="/static/zTree/js/jquery.ztree.core-3.5.js"></script>
+<script src="/static/js/product.js"></script>
+{% endblock %}
