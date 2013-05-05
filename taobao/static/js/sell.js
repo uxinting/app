@@ -9,7 +9,7 @@ $(function() {
 		if (status == 'success') {
 			$('#base-warn').hide();
 			if (jsondata.indexOf('error') != -1) {
-				$('#base-error').text(josndata).show();
+				$('#base-error').text(jsondata).show();
 			}
 			
 			sellcount = Morris.Line({

@@ -162,7 +162,9 @@ class Products:
     '''User for user's products option'''
     def __init__(self, session, options):
         ''' If session is None,options must has keys include "appkey, appsecret, url, sessionKey"'''
-        if session.get('product', None) is None:
+        key = 'product'+repr(options.get('parent_cid', 0))
+        
+        if session.get(key, None) is None:
             try:
                 appkey = options['appkey']
                 appsecret = options['appsecret']
@@ -181,9 +183,9 @@ class Products:
                 for k, v in options.items():
                     if hasattr(req, k):
                         setattr(req, k, v)
-
+                
                 res = req.getResponse(sessionKey).get('itemcats_get_response')
-                session['product'] = res
+                session[key] = res
             except Exception, e:
                 raise Exception(repr(e))
         
@@ -195,7 +197,7 @@ class Products:
             
             products = []
             for p in product:
-                products.append({'id': p['cid'], 'pId': p['parent_cid'], 'name': p['name']})
+                products.append({'id': p['cid'], 'pId': p['parent_cid'], 'name': p['name'], 'isParent': p['is_parent']})
                 
             import json
             return json.dumps(products)

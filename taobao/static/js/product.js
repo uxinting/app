@@ -6,7 +6,20 @@ $(function() {
 			simpleData: {
 				enable: true
 			}
+		},
+		callback: {
+			onClick: onclick
+		},
+		async: {
+			enable: true,
+			url: "/product/ajax",
+			autoParam: [ 'id' ],
+			otherParam: { 'type': 'product' }
 		}
+	};
+	
+	function onclick(event, treeId, treeNode) {
+		alert(treeNode.tId + " " + treeNode.id + " " + treeNode.name);
 	};
 	
 	var products_tree;
